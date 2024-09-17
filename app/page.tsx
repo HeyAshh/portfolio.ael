@@ -81,8 +81,6 @@ const translations = {
       'Excellent communication',
       'Commitment to quality',
       'Free prototype upon request',
-      'Unlimited revisions until fully satisfied',
-      'Negotiable pricing to fit any project',
     ],
     portfolioButton: 'View Portfolio',
     contactButton: 'Contact Me',
@@ -240,12 +238,18 @@ export default function Home() {
             <button
               onClick={handleLanguageChange}
               aria-label="Russian"
-              className="text-xl text-[#623ea8] focus:outline-none animate-pulse"
+              className="text-xl text-[#623ea8] focus:outline-none"
             >
-              🇷🇺
+              <img
+                src="https://flagcdn.com/us.svg"
+                alt="US Flag"
+                className="w-6 h-4"
+              />
             </button>
             {showSuggestion && (
-              <span className="text-xs text-gray-400 ml-2">{t.languageSuggestion}</span>
+              <span className="text-xs text-gray-400 ml-2 bg-gray-700 p-1 rounded-full">
+                {t.languageSuggestion}
+              </span>
             )}
           </>
         ) : (
@@ -255,11 +259,12 @@ export default function Home() {
               aria-label="English"
               className="text-xl text-[#623ea8] focus:outline-none"
             >
-              🇺🇸
+              <img
+                src="https://flagcdn.com/ru.svg"
+                alt="Russian Flag"
+                className="w-6 h-4"
+              />
             </button>
-            {showSuggestion && (
-              <span className="text-xs text-gray-400 ml-2">{t.languageSuggestion}</span>
-            )}
           </>
         )}
       </div>
