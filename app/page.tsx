@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import Link from 'next/link';
-import { Mail, DollarSign, Layout, Star } from 'lucide-react';
+import { Mail, Layout, Star } from 'lucide-react';
 
 // Define separate prop interfaces using discriminated unions
 interface ButtonAsButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -59,51 +59,61 @@ const Button: FC<ButtonProps> = ({
 const translations = {
   en: {
     name: 'Ael',
-    subtitle: 'Aspiring Upwork Web Developer & Designer',
-    introTitle: 'Fresh Talent, Boundless Enthusiasm',
+    subtitle: 'Web Developer & Designer',
+    introTitle: 'Professional Web Development Services',
     introText:
-      "As a new freelancer on Upwork, I'm excited to bring fresh perspectives and innovative ideas to your web projects. I'm committed to delivering high-quality solutions and building long-lasting client relationships. Let's create something amazing together and grow our portfolios side by side!",
-    rateHighlights: [
-      { icon: <DollarSign className="h-5 w-5 text-[#623ea8]" />, text: '$10/hr' },
-      { icon: <Layout className="h-5 w-5 text-[#623ea8]" />, text: '$20/page' },
-    ],
-    keyPointsTitle: 'Why Choose a Rising Star?',
+      'Offering comprehensive web development and design solutions. Specializing in blockchain API integration, automation using Python and Rust, and creating responsive, user-friendly websites tailored to your needs.',
+    keyPointsTitle: 'Why Choose My Services?',
     keyPoints: [
-      'Eager to exceed expectations',
-      'Fresh, innovative ideas',
-      'Flexible and adaptive',
-      'Competitive rates',
-      'Dedicated to your success',
-      'Building long-term relationships',
+      'Reliable and efficient',
+      'Expertise in modern technologies',
+      'Tailored solutions',
+      'Timely delivery',
+      'Excellent communication',
+      'Commitment to quality',
     ],
-    collaborateButton: 'Let\'s Collaborate on Upwork',
     portfolioButton: 'View Portfolio',
     contactButton: 'Contact Me',
     footer: '© ',
+    solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
+    services: 'Services Offered:',
+    serviceList: [
+      'Web Development & Design',
+      'Blockchain API Integration',
+      'Automation with Python',
+      'Automation with Rust',
+      'Responsive & User-Friendly Websites',
+      'Custom Solutions Tailored to Your Needs',
+    ],
   },
   ru: {
     name: 'Ael',
-    subtitle: 'Начинающий веб-разработчик и дизайнер на Upwork',
-    introTitle: 'Свежий талант, безграничный энтузиазм',
+    subtitle: 'Веб-разработчик и дизайнер',
+    introTitle: 'Профессиональные услуги веб-разработки',
     introText:
-      "Как новый фрилансер на Upwork, я рад привнести свежие взгляды и инновационные идеи в ваши веб-проекты. Я стремлюсь предоставлять высококачественные решения и строить долгосрочные отношения с клиентами. Давайте создадим что-то удивительное вместе и будем расти нашими портфолио бок о бок!",
-    rateHighlights: [
-      { icon: <DollarSign className="h-5 w-5 text-[#623ea8]" />, text: '$10/час' },
-      { icon: <Layout className="h-5 w-5 text-[#623ea8]" />, text: '$20/страница' },
-    ],
-    keyPointsTitle: 'Почему выбрать восходящую звезду?',
+      'Предлагаю комплексные решения в области веб-разработки и дизайна. Специализируюсь на интеграции блокчейн API, автоматизации с использованием Python и Rust, а также создании отзывчивых и удобных веб-сайтов, адаптированных под ваши потребности.',
+    keyPointsTitle: 'Почему выбирают мои услуги?',
     keyPoints: [
-      'Стремление превзойти ожидания',
-      'Свежие, инновационные идеи',
-      'Гибкость и адаптивность',
-      'Конкурентоспособные цены',
-      'Преданность вашему успеху',
-      'Строим долгосрочные отношения',
+      'Надежность и эффективность',
+      'Экспертиза в современных технологиях',
+      'Индивидуальные решения',
+      'Своевременная доставка',
+      'Отличная коммуникация',
+      'Стремление к качеству',
     ],
-    collaborateButton: 'Давайте сотрудничать на Upwork',
     portfolioButton: 'Просмотреть портфолио',
     contactButton: 'Связаться со мной',
     footer: '© ',
+    solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
+    services: 'Предлагаемые услуги:',
+    serviceList: [
+      'Веб-разработка и дизайн',
+      'Интеграция блокчейн API',
+      'Автоматизация с Python',
+      'Автоматизация с Rust',
+      'Отзывчивые и удобные веб-сайты',
+      'Индивидуальные решения под ваши нужды',
+    ],
   },
 };
 
@@ -199,13 +209,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4 overflow-hidden">
+    <div className="relative min-h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4 overflow-hidden">
       {/* Language Switcher */}
       <div className="absolute top-4 right-4 flex space-x-2 z-20">
-        <button onClick={() => setLanguage('en')} aria-label="English">
+        <button
+          onClick={() => setLanguage('en')}
+          aria-label="English"
+          className={`text-xl ${language === 'en' ? 'text-[#623ea8]' : 'text-gray-400'}`}
+        >
           🇺🇸
         </button>
-        <button onClick={() => setLanguage('ru')} aria-label="Russian">
+        <button
+          onClick={() => setLanguage('ru')}
+          aria-label="Russian"
+          className={`text-xl ${language === 'ru' ? 'text-[#623ea8]' : 'text-gray-400'}`}
+        >
           🇷🇺
         </button>
       </div>
@@ -232,19 +250,19 @@ export default function Home() {
           </p>
         </section>
 
-        {/* Rate Highlights */}
-        <section className="flex justify-center space-x-8 w-full">
-          {t.rateHighlights.map((rate, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 p-4 rounded-md shadow-lg border-l-4 border-[#623ea8]"
-            >
-              <div className="flex items-center space-x-2">
-                {rate.icon}
-                <p className="text-lg font-bold">{rate.text}</p>
-              </div>
-            </div>
-          ))}
+        {/* Services Offered */}
+        <section className="text-center max-w-2xl">
+          <h3 className="text-xl font-semibold text-[#623ea8] mb-3">
+            {t.services}
+          </h3>
+          <ul className="grid grid-cols-2 gap-2 text-sm">
+            {t.serviceList.map((service, index) => (
+              <li key={index} className="flex items-start">
+                <Star className="mr-2 h-4 w-4 text-[#623ea8] flex-shrink-0 mt-1" />
+                <span>{service}</span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* Key Points */}
@@ -270,7 +288,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Mail className="mr-2 h-5 w-5" />
+            <Layout className="mr-2 h-5 w-5" />
             {t.portfolioButton}
           </Button>
           <Button
@@ -281,38 +299,16 @@ export default function Home() {
             {t.contactButton}
           </Button>
         </section>
-
-        {/* Additional Call to Action */}
-        <section className="flex space-x-4 mt-4">
-          <Button
-            asLink
-            href="https://www.upwork.com/freelancers/~01c06a4568eadc881d?viewMode=1&s=1044578476142100494"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Mail className="mr-2 h-5 w-5" />
-            {t.collaborateButton}
-          </Button>
-          <Button
-            asLink
-            href="https://ael.gitbook.io/ael-portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Mail className="mr-2 h-5 w-5" />
-            {t.portfolioButton}
-          </Button>
-        </section>
       </main>
 
       {/* Footer */}
-      <footer className="absolute bottom-2 text-center text-xs text-gray-500 w-full flex flex-col items-center space-y-1">
+      <footer className="absolute bottom-4 text-center text-xs text-gray-500 w-full flex flex-col items-center space-y-1">
         <p>
           {t.footer}{new Date().getFullYear()} {t.name}. All rights reserved.
         </p>
-        {/* Hidden Solana Address */}
-        <p className="text-transparent hover:text-gray-400 transition-colors cursor-pointer">
-          ✨ Solana Address: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨
+        {/* Visible Solana Address */}
+        <p className="mt-2 text-[#623ea8]">
+          {t.solanaTip}
         </p>
       </footer>
     </div>
