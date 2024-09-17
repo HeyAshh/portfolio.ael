@@ -62,7 +62,16 @@ const translations = {
     subtitle: 'Web Developer & Designer',
     introTitle: 'Professional Web Development Services',
     introText:
-      'Offering comprehensive web development and design solutions. Specializing in blockchain API integration, automation using Python and Rust, and creating responsive, user-friendly websites tailored to your needs.',
+      'Offering comprehensive web development and design solutions. Specializing in blockchain API integration, automation using Python and Rust for high-performance use cases, and creating responsive, user-friendly websites tailored to your needs.',
+    services: 'Services Offered:',
+    serviceList: [
+      'Web Development & Design',
+      'Blockchain API Integration',
+      'Automation with Python',
+      'Automation with Rust (High-Performance Use Cases)',
+      'Responsive & User-Friendly Websites',
+      'Custom Solutions Tailored to Your Needs',
+    ],
     keyPointsTitle: 'Why Choose My Services?',
     keyPoints: [
       'Reliable and efficient',
@@ -71,27 +80,31 @@ const translations = {
       'Timely delivery',
       'Excellent communication',
       'Commitment to quality',
+      'Free prototype upon request',
+      'Unlimited revisions until fully satisfied',
+      'Negotiable pricing to fit any project',
     ],
     portfolioButton: 'View Portfolio',
     contactButton: 'Contact Me',
     footer: '© ',
     solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
-    services: 'Services Offered:',
-    serviceList: [
-      'Web Development & Design',
-      'Blockchain API Integration',
-      'Automation with Python',
-      'Automation with Rust',
-      'Responsive & User-Friendly Websites',
-      'Custom Solutions Tailored to Your Needs',
-    ],
+    emailCode: 'ael.dev@proton.me',
   },
   ru: {
     name: 'Ael',
     subtitle: 'Веб-разработчик и дизайнер',
     introTitle: 'Профессиональные услуги веб-разработки',
     introText:
-      'Предлагаю комплексные решения в области веб-разработки и дизайна. Специализируюсь на интеграции блокчейн API, автоматизации с использованием Python и Rust, а также создании отзывчивых и удобных веб-сайтов, адаптированных под ваши потребности.',
+      'Предлагаю комплексные решения в области веб-разработки и дизайна. Специализируюсь на интеграции блокчейн API, автоматизации с использованием Python и Rust для высокопроизводительных задач, а также создании отзывчивых и удобных веб-сайтов, адаптированных под ваши потребности.',
+    services: 'Предлагаемые услуги:',
+    serviceList: [
+      'Веб-разработка и дизайн',
+      'Интеграция блокчейн API',
+      'Автоматизация с Python',
+      'Автоматизация с Rust (Высокопроизводительные задачи)',
+      'Отзывчивые и удобные веб-сайты',
+      'Индивидуальные решения под ваши нужды',
+    ],
     keyPointsTitle: 'Почему выбирают мои услуги?',
     keyPoints: [
       'Надежность и эффективность',
@@ -100,20 +113,15 @@ const translations = {
       'Своевременная доставка',
       'Отличная коммуникация',
       'Стремление к качеству',
+      'Бесплатный прототип по запросу',
+      'Неограниченные правки до полного удовлетворения',
+      'Доступные цены под любой проект',
     ],
     portfolioButton: 'Просмотреть портфолио',
     contactButton: 'Связаться со мной',
     footer: '© ',
     solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
-    services: 'Предлагаемые услуги:',
-    serviceList: [
-      'Веб-разработка и дизайн',
-      'Интеграция блокчейн API',
-      'Автоматизация с Python',
-      'Автоматизация с Rust',
-      'Отзывчивые и удобные веб-сайты',
-      'Индивидуальные решения под ваши нужды',
-    ],
+    emailCode: 'ael.dev@proton.me',
   },
 };
 
@@ -208,6 +216,18 @@ export default function Home() {
     };
   }, []);
 
+  // Function to copy email to clipboard
+  const copyToClipboard = (email: string) => {
+    navigator.clipboard.writeText(email).then(
+      () => {
+        alert('Email copied to clipboard!');
+      },
+      () => {
+        alert('Failed to copy email.');
+      }
+    );
+  };
+
   return (
     <div className="relative min-h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4 overflow-hidden">
       {/* Language Switcher */}
@@ -215,14 +235,18 @@ export default function Home() {
         <button
           onClick={() => setLanguage('en')}
           aria-label="English"
-          className={`text-xl ${language === 'en' ? 'text-[#623ea8]' : 'text-gray-400'}`}
+          className={`text-xl ${
+            language === 'en' ? 'text-[#623ea8]' : 'text-gray-400'
+          }`}
         >
           🇺🇸
         </button>
         <button
           onClick={() => setLanguage('ru')}
           aria-label="Russian"
-          className={`text-xl ${language === 'ru' ? 'text-[#623ea8]' : 'text-gray-400'}`}
+          className={`text-xl ${
+            language === 'ru' ? 'text-[#623ea8]' : 'text-gray-400'
+          }`}
         >
           🇷🇺
         </button>
@@ -245,9 +269,7 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-[#623ea8] mb-2">
             {t.introTitle}
           </h2>
-          <p className="text-sm leading-relaxed">
-            {t.introText}
-          </p>
+          <p className="text-sm leading-relaxed">{t.introText}</p>
         </section>
 
         {/* Services Offered */}
@@ -281,35 +303,44 @@ export default function Home() {
         </section>
 
         {/* Call to Action */}
-        <section className="flex space-x-4">
-          <Button
-            asLink
-            href="https://ael.gitbook.io/ael-portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Layout className="mr-2 h-5 w-5" />
-            {t.portfolioButton}
-          </Button>
-          <Button
-            asLink
-            href="mailto:ael.dev@proton.me"
-          >
-            <Mail className="mr-2 h-5 w-5" />
-            {t.contactButton}
-          </Button>
+        <section className="flex flex-col space-y-4 items-center">
+          <div className="flex space-x-4">
+            <Button
+              asLink
+              href="https://ael.gitbook.io/ael-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Layout className="mr-2 h-5 w-5" />
+              {t.portfolioButton}
+            </Button>
+            <Button asLink href="mailto:ael.dev@proton.me">
+              <Mail className="mr-2 h-5 w-5" />
+              {t.contactButton}
+            </Button>
+          </div>
+          {/* Email Code Blocks */}
+          <div className="flex space-x-4">
+            <div className="bg-gray-800 p-4 rounded-md shadow-inner w-48 text-center cursor-pointer" onClick={() => copyToClipboard(t.emailCode)}>
+              <code className="text-xs text-[#00ff00]">{t.emailCode}</code>
+              <p className="text-[10px] text-gray-400 mt-1">Click to copy</p>
+            </div>
+            <div className="bg-gray-800 p-4 rounded-md shadow-inner w-48 text-center cursor-pointer" onClick={() => copyToClipboard(t.emailCode)}>
+              <code className="text-xs text-[#00ff00]">{t.emailCode}</code>
+              <p className="text-[10px] text-gray-400 mt-1">Click to copy</p>
+            </div>
+          </div>
         </section>
       </main>
 
       {/* Footer */}
       <footer className="absolute bottom-4 text-center text-xs text-gray-500 w-full flex flex-col items-center space-y-1">
         <p>
-          {t.footer}{new Date().getFullYear()} {t.name}. All rights reserved.
+          {t.footer}
+          {new Date().getFullYear()} {t.name}. All rights reserved.
         </p>
         {/* Visible Solana Address */}
-        <p className="mt-2 text-[#623ea8]">
-          {t.solanaTip}
-        </p>
+        <p className="mt-2 text-[#623ea8]">{t.solanaTip}</p>
       </footer>
     </div>
   );
