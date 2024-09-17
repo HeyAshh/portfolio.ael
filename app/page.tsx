@@ -89,7 +89,6 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
-    languagePrompt: 'Изменить язык на русский?',
   },
   ru: {
     name: 'Ael',
@@ -123,7 +122,6 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
-    languagePrompt: 'Change language to English?',
   },
 };
 
@@ -173,10 +171,8 @@ export default function Home() {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        if (particle.x < 0 || particle.x > canvas.width)
-          particle.vx = -particle.vx;
-        if (particle.y < 0 || particle.y > canvas.height)
-          particle.vy = -particle.vy;
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx = -particle.vx;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy = -particle.vy;
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, 1.5, 0, Math.PI * 2);
@@ -193,9 +189,7 @@ export default function Home() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = `rgba(98, 62, 168, ${
-              0.2 * (1 - distance / maxDistance)
-            })`;
+            ctx.strokeStyle = `rgba(98, 62, 168, ${0.2 * (1 - distance / maxDistance)})`;
             ctx.stroke();
           }
         });
@@ -245,7 +239,7 @@ export default function Home() {
           <button
             onClick={handleLanguageChange}
             aria-label="Russian"
-            className="text-xl text-[#623ea8] focus:outline-none"
+            className="text-xl text-[#623ea8] focus:outline-none animate-pulse"
           >
             🇷🇺
           </button>
@@ -253,42 +247,12 @@ export default function Home() {
           <button
             onClick={handleLanguageChange}
             aria-label="English"
-            className="text-xl text-[#623ea8] focus:outline-none"
+            className="text-xl text-[#623ea8] focus:outline-none animate-pulse"
           >
             🇺🇸
           </button>
         )}
       </div>
-
-      {/* Language Prompt Cloud */}
-      {showPrompt && (
-        <div className="absolute top-16 right-4 flex items-center space-x-2 bg-gray-800 p-2 rounded-full opacity-90">
-          <span>☁️</span>
-          <span className="text-xs">{t.languagePrompt}</span>
-          <button
-            onClick={handleLanguageChange}
-            className="ml-1 text-[#623ea8] focus:outline-none"
-            aria-label="Change Language"
-          >
-            ➡️
-          </button>
-        </div>
-      )}
-
-      {/* Arrow from Cloud to Language Switcher */}
-      {showPrompt && (
-        <svg
-          className="absolute top-24 right-6 w-8 h-8 z-10"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#623ea8"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      )}
 
       <canvas
         ref={canvasRef}
@@ -375,7 +339,9 @@ export default function Home() {
           {new Date().getFullYear()} {t.name}. All rights reserved.
         </p>
         {/* Visible Solana Address */}
-        <p className="mt-2 text-[#623ea8]">{t.solanaTip}</p>
+        <p className="mt-2 text-[#623ea8]">
+          ✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨
+        </p>
       </footer>
     </div>
   );
