@@ -89,6 +89,7 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
+    languageSuggestion: 'Изменить язык на русский',
   },
   ru: {
     name: 'Ael',
@@ -114,21 +115,20 @@ const translations = {
       'Отличная коммуникация',
       'Стремление к качеству',
       'Бесплатный прототип по запросу',
-      'Неограниченные правки до полного удовлетворения',
-      'Доступные цены под любой проект',
     ],
     portfolioButton: 'Просмотреть портфолио',
     contactButton: 'Связаться со мной',
     footer: '© ',
     solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
+    languageSuggestion: 'Change language to English',
   },
 };
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [language, setLanguage] = useState<'en' | 'ru'>('en');
-  const [showPrompt, setShowPrompt] = useState(true);
+  const [showSuggestion, setShowSuggestion] = useState(true);
 
   const t = translations[language];
 
@@ -225,32 +225,42 @@ export default function Home() {
     );
   };
 
-  // Handle language change and hide prompt
+  // Handle language change and hide suggestion
   const handleLanguageChange = () => {
     setLanguage(language === 'en' ? 'ru' : 'en');
-    setShowPrompt(false);
+    setShowSuggestion(false);
   };
 
   return (
     <div className="relative min-h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4 overflow-hidden">
       {/* Language Switcher */}
-      <div className="absolute top-4 right-4 flex space-x-2 z-20">
+      <div className="absolute top-4 right-4 flex items-center space-x-2 z-20">
         {language === 'en' ? (
-          <button
-            onClick={handleLanguageChange}
-            aria-label="Russian"
-            className="text-xl text-[#623ea8] focus:outline-none animate-pulse"
-          >
-            🇷🇺
-          </button>
+          <>
+            <button
+              onClick={handleLanguageChange}
+              aria-label="Russian"
+              className="text-xl text-[#623ea8] focus:outline-none animate-pulse"
+            >
+              🇷🇺
+            </button>
+            {showSuggestion && (
+              <span className="text-xs text-gray-400 ml-2">{t.languageSuggestion}</span>
+            )}
+          </>
         ) : (
-          <button
-            onClick={handleLanguageChange}
-            aria-label="English"
-            className="text-xl text-[#623ea8] focus:outline-none animate-pulse"
-          >
-            🇺🇸
-          </button>
+          <>
+            <button
+              onClick={handleLanguageChange}
+              aria-label="English"
+              className="text-xl text-[#623ea8] focus:outline-none"
+            >
+              🇺🇸
+            </button>
+            {showSuggestion && (
+              <span className="text-xs text-gray-400 ml-2">{t.languageSuggestion}</span>
+            )}
+          </>
         )}
       </div>
 
