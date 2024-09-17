@@ -87,7 +87,6 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
-    languageSuggestion: 'Изменить язык на русский',
   },
   ru: {
     name: 'Ael',
@@ -119,7 +118,6 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
-    languageSuggestion: 'Change language to English',
   },
 };
 
@@ -238,31 +236,26 @@ export default function Home() {
             <button
               onClick={handleLanguageChange}
               aria-label="Russian"
-              className="text-xl text-[#623ea8] focus:outline-none"
+              className="focus:outline-none"
             >
               <img
-                src="https://flagcdn.com/us.svg"
-                alt="US Flag"
-                className="w-6 h-4"
+                src="https://flagcdn.com/w20/ru.png"
+                alt="Russian Flag"
+                className="w-5 h-auto"
               />
             </button>
-            {showSuggestion && (
-              <span className="text-xs text-gray-400 ml-2 bg-gray-700 p-1 rounded-full">
-                {t.languageSuggestion}
-              </span>
-            )}
           </>
         ) : (
           <>
             <button
               onClick={handleLanguageChange}
               aria-label="English"
-              className="text-xl text-[#623ea8] focus:outline-none"
+              className="focus:outline-none"
             >
               <img
-                src="https://flagcdn.com/ru.svg"
-                alt="Russian Flag"
-                className="w-6 h-4"
+                src="https://flagcdn.com/w20/us.png"
+                alt="US Flag"
+                className="w-5 h-auto"
               />
             </button>
           </>
