@@ -89,7 +89,7 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
-    languagePrompt: 'Change language to Russian?',
+    languagePrompt: 'Изменить язык на русский?',
   },
   ru: {
     name: 'Ael',
@@ -123,13 +123,14 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
-    languagePrompt: 'Изменить язык на русский?',
+    languagePrompt: 'Change language to English?',
   },
 };
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [language, setLanguage] = useState<'en' | 'ru'>('en');
+  const [showPrompt, setShowPrompt] = useState(true);
 
   const t = translations[language];
 
@@ -230,38 +231,63 @@ export default function Home() {
     );
   };
 
+  // Handle language change and hide prompt
+  const handleLanguageChange = () => {
+    setLanguage(language === 'en' ? 'ru' : 'en');
+    setShowPrompt(false);
+  };
+
   return (
     <div className="relative min-h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4 overflow-hidden">
       {/* Language Switcher */}
       <div className="absolute top-4 right-4 flex space-x-2 z-20">
-        <button
-          onClick={() => setLanguage('en')}
-          aria-label="English"
-          className={`text-xl ${
-            language === 'en' ? 'text-[#623ea8]' : 'text-gray-400'
-          }`}
-        >
-          🇺🇸
-        </button>
-        <button
-          onClick={() => setLanguage('ru')}
-          aria-label="Russian"
-          className={`text-xl ${
-            language === 'ru' ? 'text-[#623ea8]' : 'text-gray-400'
-          }`}
-        >
-          🇷🇺
-        </button>
+        {language === 'en' ? (
+          <button
+            onClick={handleLanguageChange}
+            aria-label="Russian"
+            className="text-xl text-[#623ea8] focus:outline-none"
+          >
+            🇷🇺
+          </button>
+        ) : (
+          <button
+            onClick={handleLanguageChange}
+            aria-label="English"
+            className="text-xl text-[#623ea8] focus:outline-none"
+          >
+            🇺🇸
+          </button>
+        )}
       </div>
 
       {/* Language Prompt Cloud */}
-      {language === 'en' && (
-        <div className="absolute top-16 right-4 bg-gray-800 p-2 rounded-full flex items-center space-x-2 opacity-75">
+      {showPrompt && (
+        <div className="absolute top-16 right-4 flex items-center space-x-2 bg-gray-800 p-2 rounded-full opacity-90">
           <span>☁️</span>
-          <span className="text-xs">
-            {translations.en.languagePrompt}
-          </span>
+          <span className="text-xs">{t.languagePrompt}</span>
+          <button
+            onClick={handleLanguageChange}
+            className="ml-1 text-[#623ea8] focus:outline-none"
+            aria-label="Change Language"
+          >
+            ➡️
+          </button>
         </div>
+      )}
+
+      {/* Arrow from Cloud to Language Switcher */}
+      {showPrompt && (
+        <svg
+          className="absolute top-24 right-6 w-8 h-8 z-10"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#623ea8"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
       )}
 
       <canvas
@@ -331,9 +357,9 @@ export default function Home() {
               {t.contactButton}
             </Button>
           </div>
-          {/* Single Email Code Block */}
+          {/* Single Email Copy Button */}
           <button
-            className="bg-gray-800 p-3 rounded-md shadow-inner w-48 text-center cursor-pointer flex flex-col items-center"
+            className="bg-gray-800 p-2 rounded-md shadow-inner w-48 text-center cursor-pointer flex flex-col items-center"
             onClick={() => copyToClipboard(t.emailCode)}
           >
             <code className="text-xs text-[#00ff00]">{t.emailCode}</code>
