@@ -62,13 +62,13 @@ const translations = {
     subtitle: 'Web Developer & Designer',
     introTitle: 'Professional Web Development Services',
     introText:
-      'Offering comprehensive web development and design solutions. Specializing in blockchain API integration, automation using Python and Rust for high-performance use cases, and creating responsive, user-friendly websites tailored to your needs.',
+      'Offering comprehensive web development and design solutions. Specializing in blockchain API integration, automation using Python and Rust, and creating responsive, user-friendly websites tailored to your needs.',
     services: 'Services Offered:',
     serviceList: [
       'Web Development & Design',
       'Blockchain API Integration',
       'Automation with Python',
-      'Automation with Rust (High-Performance Use Cases)',
+      'Automation with Rust',
       'Responsive & User-Friendly Websites',
       'Custom Solutions Tailored to Your Needs',
     ],
@@ -89,19 +89,20 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Tips via Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
+    languagePrompt: 'Change language to Russian?',
   },
   ru: {
     name: 'Ael',
     subtitle: 'Веб-разработчик и дизайнер',
     introTitle: 'Профессиональные услуги веб-разработки',
     introText:
-      'Предлагаю комплексные решения в области веб-разработки и дизайна. Специализируюсь на интеграции блокчейн API, автоматизации с использованием Python и Rust для высокопроизводительных задач, а также создании отзывчивых и удобных веб-сайтов, адаптированных под ваши потребности.',
+      'Предлагаю комплексные решения в области веб-разработки и дизайна. Специализируюсь на интеграции блокчейн API, автоматизации с использованием Python и Rust, а также создании отзывчивых и удобных веб-сайтов, адаптированных под ваши потребности.',
     services: 'Предлагаемые услуги:',
     serviceList: [
       'Веб-разработка и дизайн',
       'Интеграция блокчейн API',
       'Автоматизация с Python',
-      'Автоматизация с Rust (Высокопроизводительные задачи)',
+      'Автоматизация с Rust',
       'Отзывчивые и удобные веб-сайты',
       'Индивидуальные решения под ваши нужды',
     ],
@@ -122,6 +123,7 @@ const translations = {
     footer: '© ',
     solanaTip: '✨ Пожертвования через Solana: 8bwEs6utJ8XuK9QYQTQUc1byRJ7YDKAG7VqB7xys6g66 ✨',
     emailCode: 'ael.dev@proton.me',
+    languagePrompt: 'Изменить язык на русский?',
   },
 };
 
@@ -252,6 +254,16 @@ export default function Home() {
         </button>
       </div>
 
+      {/* Language Prompt Cloud */}
+      {language === 'en' && (
+        <div className="absolute top-16 right-4 bg-gray-800 p-2 rounded-full flex items-center space-x-2 opacity-75">
+          <span>☁️</span>
+          <span className="text-xs">
+            {translations.en.languagePrompt}
+          </span>
+        </div>
+      )}
+
       <canvas
         ref={canvasRef}
         className="absolute top-0 left-0 w-full h-full"
@@ -319,17 +331,14 @@ export default function Home() {
               {t.contactButton}
             </Button>
           </div>
-          {/* Email Code Blocks */}
-          <div className="flex space-x-4">
-            <div className="bg-gray-800 p-4 rounded-md shadow-inner w-48 text-center cursor-pointer" onClick={() => copyToClipboard(t.emailCode)}>
-              <code className="text-xs text-[#00ff00]">{t.emailCode}</code>
-              <p className="text-[10px] text-gray-400 mt-1">Click to copy</p>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-md shadow-inner w-48 text-center cursor-pointer" onClick={() => copyToClipboard(t.emailCode)}>
-              <code className="text-xs text-[#00ff00]">{t.emailCode}</code>
-              <p className="text-[10px] text-gray-400 mt-1">Click to copy</p>
-            </div>
-          </div>
+          {/* Single Email Code Block */}
+          <button
+            className="bg-gray-800 p-3 rounded-md shadow-inner w-48 text-center cursor-pointer flex flex-col items-center"
+            onClick={() => copyToClipboard(t.emailCode)}
+          >
+            <code className="text-xs text-[#00ff00]">{t.emailCode}</code>
+            <p className="text-[10px] text-gray-400 mt-1">Click to copy</p>
+          </button>
         </section>
       </main>
 
